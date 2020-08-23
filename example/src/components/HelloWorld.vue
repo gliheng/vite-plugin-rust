@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import init, { greet } from 'rust_crate';
+import init from 'rust_crate';
 
 export default {
   name: 'HelloWorld',
@@ -13,7 +13,14 @@ export default {
     msg: String
   },
   created() {
-    init();
+    init().then(m => {
+      m.greet();
+    });
+    // The following async loading also works
+    // import('rust_crate').then(async (m) => {
+    //   await m.default();
+    //   m.greet();
+    // });
   },
   data() {
     return {

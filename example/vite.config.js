@@ -1,7 +1,7 @@
 const rust = require('vite-plugin-rust');
 
 module.exports = {
-  a:123,
+  minify: 'esbuild',
   plugins: [
     rust({
       crates: {

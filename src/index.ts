@@ -1,17 +1,32 @@
-import { resolver } from './resolver';
-import { rustServerPlugin } from './serverPlugin';
-import { rustTransform } from './transform';
-import { setConfig } from './config';
+import { createRustRollupPlugin } from './rustRollupPlugin';
 
-interface PluginConfig {
+interface PluginOpts {
   crates: any,
 }
 
-module.exports = (config: PluginConfig) => {
-  setConfig(config);
+const PREFIX = '/@rust/';
+
+module.exports = (opts: PluginOpts) => {
+
   return {
-    resolvers: [ resolver ],
-    configureServer: rustServerPlugin,
-    transforms: [ rustTransform ]
+    alias: {
+      '/@rust/rust_crate/': 'C:\\Users\\juju\\Develop\\vite-plugin-rust\\example\\crate\\pkg'
+    },
+    resolvers: [{
+      alias(id: string) {
+        let parts = id.split('/', 1);
+        if (parts.length >= 1) {
+          let crate = parts[0];
+          if (crate in opts.crates) {
+            return PREFIX + crate + '/' + (parts[1] || 'rust_crate.js');
+          }
+        }
+      }
+    }],
+    rollupInputOptions: {
+      plugins: [
+        createRustRollupPlugin(),
+      ]
+    }
   };
 };
