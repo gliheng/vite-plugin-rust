@@ -20,16 +20,16 @@
   "author": "juju",
   "license": "MIT",
   "dependencies": {
-    "glob": "^7.1.6",
-    "rimraf": "^3.0.0",
-    "toml": "^3.0.0",
-    "wasm-pack": "^0.9.0"
+    "chalk": "^4.1.0",
+    "debug": "^4.1.1",
+    "which": "^2.0.2"
   },
   "peerDependencies": {
     "vite": ">=1.0.0-beta.1"
   },
   "devDependencies": {
     "@types/node": "^14.0.3",
+    "@types/which": "^1.3.2",
     "typescript": "^3.9.2",
     "vite": "^1.0.0-beta.1"
   }
