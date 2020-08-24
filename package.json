@@ -1,7 +1,7 @@
 {
   "name": "vite-plugin-rust",
   "version": "1.0.0",
-  "description": "",
+  "description": "A vite plugin that intergrate rust & wasm-pack",
   "main": "dist/index.js",
   "files": [
     "dist"
@@ -13,6 +13,17 @@
     "wasm-pack",
     "vite"
   ],
+  "engines": {
+    "node": ">=10.16.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gliheng/vite-plugin-rust.git"
+  },
+  "bugs": {
+    "url": "https://github.com/gliheng/vite-plugin-rust/issues"
+  },
+  "homepage": "https://github.com/gliheng/vite-plugin-rust/tree/master/#readme",
   "scripts": {
     "dev": "tsc -w -p .",
     "build": "npx rimraf dist && tsc -p ."
