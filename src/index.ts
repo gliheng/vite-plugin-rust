@@ -1,5 +1,5 @@
 import { UserConfig, normalizeConfig } from './config';
-import { compile } from './compiler';
+import { compile, watch } from './compiler';
 import { createRustRollupPlugin } from './rustRollupPlugin';
 
 const debug = require('debug')('vite-plugin-rust:index');
@@ -18,7 +18,12 @@ module.exports = (config: UserConfig) => {
   debug('vite-plugin-rust config', cfg);
   // Do initial compile in dev mode
   // wasm-pack compile in build is done in rollup plugin
-  compile(cfg.wasmPack, cfg.crates, true);
+  compile(cfg, '', true);
+  
+  // TODO: only watch in dev mode
+  watch(cfg, crate => {
+    compile(cfg, crate);
+  });
 
   return {
     resolvers: [{
