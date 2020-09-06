@@ -1,6 +1,6 @@
 {
   "name": "vite-plugin-rust",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A vite plugin that intergrate rust & wasm-pack",
   "main": "dist/index.js",
   "files": [
