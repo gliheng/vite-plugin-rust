@@ -1,4 +1,5 @@
 import { spawnSync, spawn } from 'child_process';
+import path from 'path';
 import { PluginConfig, WasmPackOpts } from "./config";
 import chalk from 'chalk';
 import chokidar from 'chokidar';
@@ -50,9 +51,14 @@ export function compile(cfg: PluginConfig, crate?: string, sync?: boolean) {
 type WatchCallback = (crateName: string) => void;
 
 export function watch(cfg: PluginConfig, cbk: WatchCallback) {
-    Object.entries(cfg.crates).forEach(([crateName, opt]) => {        
-        chokidar.watch(opt.path).on('all', (event, path) => {
-          console.log('crate', crateName, 'changed:', event, path);
+    Object.entries(cfg.crates).forEach(([crateName, opt]) => {    
+        chokidar.watch([
+            path.join(opt.path, '/src'),
+            path.join(opt.path, 'Cargo.toml'),
+        ], {
+            ignoreInitial: true,
+        }).on('all', (event, path) => {
+          console.log('Crate', crateName, 'changed!', 'Event:', event, 'File:', path);
           cbk(crateName);
         });
     });

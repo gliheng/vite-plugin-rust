@@ -17,7 +17,7 @@ extern {
 
 #[wasm_bindgen]
 pub fn greet() {
-    alert("Hello, designer!");
+    alert("Hello, vite!");
 }
 
 // This is like the `main` function, except for JavaScript.
@@ -34,3 +34,4 @@ pub fn main_js() -> Result<(), JsValue> {
 
     Ok(())
 }
+
